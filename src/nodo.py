@@ -30,3 +30,8 @@ class Nodo:
     
     def agregar_vecino(self, nodo):
         self.vecinos.append(nodo)
+
+    def __lt__(self, other):
+        # Se puede utilizar cualquier criterio para comparar los nodos
+        # En este caso, se utiliza el costo acumulado
+        return self.costo < other.costo
