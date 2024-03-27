@@ -111,9 +111,24 @@ class Simulacion:
         return 0.7 * costo_tiempo + 0.3 * costo_combustible
 
     def calcular_ruta_tour_trip(self):
-        # Implementar la lógica para calcular la ruta que visita todos los puntos de interés
-        # ...
-        pass
+        # Obtener la lista de puntos de interés
+        puntos_interes = [nodo for fila in self.mapa.matriz for nodo in fila if nodo.es_punto_interes]
+
+        # Si no hay puntos de interés, devolver None
+        if not puntos_interes:
+            return None
+
+        # Comenzar en el primer punto de interés
+        ruta = [puntos_interes[0]]
+
+        # Visitar los demás puntos de interés en orden aleatorio
+        for punto_interes in puntos_interes[1:]:
+            ruta.append(punto_interes)
+
+        # Regresar al punto de origen
+        ruta.append(puntos_interes[0])
+
+        return ruta
 
     def calcular_costo(self, ruta):
         costo_total = 0

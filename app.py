@@ -97,7 +97,7 @@ if st.sidebar.button("Iniciar simulación"):
 
             # Se asume que la ruta contiene los puntos de interés visitados
             for nodo in ruta:
-                if nodo.punto_interes:
-                    st.write(f"- {nodo.punto_interes}")
+                if nodo.es_punto_interes:
+                    st.write(f"- {nodo.nombre}")
     else:
         st.error("No hay vehículos disponibles")
