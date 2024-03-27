@@ -1,5 +1,8 @@
+#algoritmos.py
 from collections import deque
 from heapq import heappush, heappop
+
+from collections import deque
 
 def bfs(mapa, origen, destino):
     cola = deque([origen])
@@ -12,10 +15,12 @@ def bfs(mapa, origen, destino):
             return reconstruir_ruta(padre, destino)
 
         for vecino in nodo_actual.vecinos:
-            if vecino not in visitados:
-                visitados.add(vecino)
-                padre[vecino] = nodo_actual
-                cola.append(vecino)
+            # Verificar si el vecino está conectado al nodo actual en el mapa
+            if mapa.estan_conectados(nodo_actual, vecino):
+                if vecino not in visitados:
+                    visitados.add(vecino)
+                    padre[vecino] = nodo_actual
+                    cola.append(vecino)
 
     return None  # No se encontró una ruta
 

@@ -1,3 +1,4 @@
+#vehiculo.py
 class Vehiculo:
     def __init__(self, id, posicion, ocupado, consumo_combustible, capacidad):
         self.id = id

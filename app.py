@@ -1,3 +1,4 @@
+#app.py
 import streamlit as st
 from src.simulacion import Simulacion
 
@@ -10,7 +11,6 @@ st.header("Mapa de la ciudad")
 simulacion = Simulacion("data/mapa-test.json")
 matriz_mapa = simulacion.mapa.matriz
 
-# Crear una tabla de Streamlit
 # Se crea una nueva matriz para mostrar la información de los nodos y los vehículos
 matriz_visualizacion = [[" " for _ in range(len(fila))] for fila in matriz_mapa]
 

@@ -1,3 +1,4 @@
+#src/nodo.py
 class Nodo:
     def __init__(self, id, nombre, sentido_via, es_punto_interes, costo, semaforo, calle, carrera):
         self.id = id
@@ -26,3 +27,6 @@ class Nodo:
 
         # Si no hay información relevante, mostrar un espacio en blanco
         return " "
+    
+    def agregar_vecino(self, nodo):
+        self.vecinos.append(nodo)

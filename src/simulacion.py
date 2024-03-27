@@ -1,3 +1,4 @@
+#simulacion.py
 import json
 from src.mapa import Mapa
 from src.vehiculo import Vehiculo
@@ -28,11 +29,14 @@ class Simulacion:
 
         # Encontrar el vehículo desocupado más cercano
         vehiculo = self.encontrar_vehiculo_cercano(origen)
-        print('vehiculo', vehiculo)
 
         if vehiculo:
             # Calcular la ruta
             ruta = self.calcular_ruta(origen, destino, tipo_viaje)
+
+             # Verificar si se encontró una ruta
+            if ruta is None:
+                return None, None, None, None, None, None  # No se encontró una ruta
 
             # Simular el movimiento del vehículo
             self.simular_movimiento(vehiculo, ruta)
@@ -56,8 +60,9 @@ class Simulacion:
         distancia_minima = float('inf')
 
         for vehiculo in self.vehiculos:
-            if vehiculo.ocupado:
+            if not vehiculo.ocupado:
                 distancia = self.calcular_distancia(self.mapa.obtener_nodo(vehiculo.posicion), origen)
+                print('distancia', distancia)
                 if distancia < distancia_minima:
                     distancia_minima = distancia
                     vehiculo_cercano = vehiculo
