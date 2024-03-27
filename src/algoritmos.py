@@ -1,4 +1,4 @@
-#algoritmos.py
+#src/algoritmos.py
 from collections import deque
 from heapq import heappush, heappop
 

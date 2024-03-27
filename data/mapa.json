@@ -1,33 +1,46 @@
 {
-    "calles": 10,
-    "carreras": 10,
-    "sentidos": [
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  "calles": 5,
+  "carreras": 5,
+  "matriz": [
+    [
+      {"id": 1, "nombre": "Fatima", "sentido_via": "derecha", "es_punto_interes": false, "costo": 20, "semaforo": {"estado": "stop", "duracion": 10}, "calle": 0, "carrera": 0},
+      {"id": 2, "nombre": "Palermo", "sentido_via": "doble", "es_punto_interes": false, "costo": 15, "semaforo": null, "calle": 0, "carrera": 1},
+      {"id": 3, "nombre": "El cable", "sentido_via": "derecha", "es_punto_interes": false, "costo": 15, "semaforo": null, "calle": 0, "carrera": 2},
+      {"id": 4, "nombre": "Pio XII", "sentido_via": "doble", "es_punto_interes": false, "costo": 10, "semaforo": {"estado": "go", "duracion": 20}, "calle": 0, "carrera": 3},
+      {"id": 5, "nombre": "Malhabar", "sentido_via": "izquierda", "es_punto_interes": false, "costo": 12, "semaforo": null, "calle": 0, "carrera": 4}
     ],
-    "semaforos": [
-      [0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
-      [1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-      [0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
-      [1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-      [0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
-      [1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-      [0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
-      [1, 0, 1, 0, 1, 0, 1, 0, 1, 0],
-      [0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
-      [1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
+    [
+      {"id": 6, "nombre": "Aranjuez", "sentido_via": "doble", "es_punto_interes": false, "costo": 18, "semaforo": null, "calle": 1, "carrera": 0},
+      {"id": 7, "nombre": "Chipre", "sentido_via": "doble", "es_punto_interes": true, "costo": 10, "semaforo": {"estado": "stop", "duracion": 40}, "calle": 1, "carrera": 1},
+      {"id": 8, "nombre": "Kenedy", "sentido_via": "derecha", "es_punto_interes": false, "costo": 25, "semaforo": null, "calle": 1, "carrera": 2},
+      {"id": 9, "nombre": "San Antonio", "sentido_via": "doble", "es_punto_interes": true, "costo": 15, "semaforo": {"estado": "go", "duracion": 20}, "calle": 1, "carrera": 3},
+      {"id": 10, "nombre": "San Rafael", "sentido_via": "izquierda", "es_punto_interes": false, "costo": 16, "semaforo": null, "calle": 1, "carrera": 4}
     ],
-    "duracion_semaforos": 30,
-    "puntos_interes": [
-      {"nombre": "Museo", "calle": 2, "carrera": 3},
-      {"nombre": "Parque", "calle": 7, "carrera": 8}
+    [
+      {"id": 11, "nombre": "Viscaya", "sentido_via": "derecha", "es_punto_interes": false, "costo": 14, "semaforo": null, "calle": 2, "carrera": 0},
+      {"id": 12, "nombre": "La Francia", "sentido_via": "doble", "es_punto_interes": false, "costo": 19, "semaforo": null, "calle": 2, "carrera": 1},
+      {"id": 13, "nombre": "La América", "sentido_via": "derecha", "es_punto_interes": false, "costo": 25, "semaforo": null, "calle": 2, "carrera": 2},
+      {"id": 14, "nombre": "Centro", "sentido_via": "doble", "es_punto_interes": false, "costo": 17, "semaforo": {"estado": "stop", "duracion": 15}, "calle": 2, "carrera": 3},
+      {"id": 15, "nombre": "Boston", "sentido_via": "izquierda", "es_punto_interes": false, "costo": 18, "semaforo": {"estado": "stop", "duracion": 15}, "calle": 2, "carrera": 4}
+    ],
+    [
+      {"id": 16, "nombre": "Sultana", "sentido_via": "doble", "es_punto_interes": false, "costo": 11, "semaforo": null, "calle": 3, "carrera": 0},
+      {"id": 17, "nombre": "Enea", "sentido_via": "izquierda", "es_punto_interes": false, "costo": 20, "semaforo": null, "calle": 3, "carrera": 1},
+      {"id": 18, "nombre": "Milan", "sentido_via": "doble", "es_punto_interes": false, "costo": 23, "semaforo": null, "calle": 3, "carrera": 2},
+      {"id": 19, "nombre": "Universitaria", "sentido_via": "doble", "es_punto_interes": true, "costo": 12, "semaforo": null, "calle": 3, "carrera": 3},
+      {"id": 20, "nombre": "La Rambla", "sentido_via": "izquierda", "es_punto_interes": false, "costo": 13, "semaforo": null, "calle": 3, "carrera": 4}
+    ],
+    [
+      {"id": 21, "nombre": "La Carola", "sentido_via": "derecha", "es_punto_interes": false, "costo": 16, "semaforo": null, "calle": 4, "carrera": 0},
+      {"id": 22, "nombre": "San Sebastian", "sentido_via": "doble", "es_punto_interes": false, "costo": 21, "semaforo": null, "calle": 4, "carrera": 1},
+      {"id": 23, "nombre": "Bosques del Norte", "sentido_via": "derecha", "es_punto_interes": false, "costo": 24, "semaforo": null, "calle": 4, "carrera": 2},
+      {"id": 24, "nombre": "Estadio", "sentido_via": "izquierda", "es_punto_interes": true, "costo": 22, "semaforo": {"estado": "go", "duracion": 30}, "calle": 4, "carrera": 3},
+      {"id": 25, "nombre": "Las Palmas", "sentido_via": "izquierda", "es_punto_interes": false, "costo": 15, "semaforo": null, "calle": 4, "carrera": 4}
     ]
-  }
+  ],
+  "vehiculos": [
+    {"id": 1, "posicion": 1, "ocupado": true, "consumo_combustible": 10, "capacidad": 4},
+    {"id": 2, "posicion": 7, "ocupado": false, "consumo_combustible": 8, "capacidad": 5},
+    {"id": 3, "posicion": 15, "ocupado": true, "consumo_combustible": 8, "capacidad": 5}
+  ]
+}

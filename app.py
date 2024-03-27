@@ -8,7 +8,7 @@ st.title("UrbanLift - Simulador de transporte")
 st.header("Mapa de la ciudad")
 
 # Se asume que la simulación tiene un atributo 'mapa' que contiene la matriz
-simulacion = Simulacion("data/mapa-test.json")
+simulacion = Simulacion("data/mapa.json")
 matriz_mapa = simulacion.mapa.matriz
 
 # Se crea una nueva matriz para mostrar la información de los nodos y los vehículos
