@@ -23,19 +23,33 @@ for i in range(len(matriz_mapa)):
         if nodo.nombre:
             matriz_visualizacion[i][j] = nodo.nombre
 
-        # Mostrar el sentido de la vía
+        # Mostrar el sentido de la vía con emojis
         if nodo.sentido_via:
-            if nodo.sentido_via == "doble":
-                matriz_visualizacion[i][j] += " <->"
-            elif nodo.sentido_via == "derecha":
-                matriz_visualizacion[i][j] += " ->"
-            elif nodo.sentido_via == "izquierda":
-                matriz_visualizacion[i][j] += " <-"
+            sentidos_str = ""
+            for sentido in nodo.sentido_via:
+                if sentido == "arriba":
+                    sentidos_str += "⬆️"
+                elif sentido == "abajo":
+                    sentidos_str += "⬇️"
+                elif sentido == "izquierda":
+                    sentidos_str += "⬅️"
+                elif sentido == "derecha":
+                    sentidos_str += "➡️"
+            matriz_visualizacion[i][j] += f" {sentidos_str}"
 
-        # Mostrar la ubicación de los vehículos
+        # Mostrar el semáforo con emojis si lo hay
+        if nodo.semaforo:
+            if nodo.semaforo is not None:
+                matriz_visualizacion[i][j] += f" 🚦"
+
+        # Mostrar el carro con emoji si lo hay
         for vehiculo in simulacion.vehiculos:
             if vehiculo.posicion == nodo.id:
-                matriz_visualizacion[i][j] += f" V{vehiculo.id}"
+                if vehiculo.ocupado:
+                    matriz_visualizacion[i][j] += f" 🚗"
+                else:
+                    matriz_visualizacion[i][j] += f" 🚓"
+        
 
 # Mostrar la tabla
 tabla_mapa = st.table(matriz_visualizacion)

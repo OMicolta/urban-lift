@@ -3,7 +3,7 @@ class Nodo:
     def __init__(self, id, nombre, sentido_via, es_punto_interes, costo, semaforo, calle, carrera):
         self.id = id
         self.nombre = nombre
-        self.sentido_via = sentido_via
+        self.sentido_via = sentido_via  # Array de tipo string
         self.es_punto_interes = es_punto_interes
         self.costo = costo
         self.semaforo = semaforo
@@ -18,16 +18,11 @@ class Nodo:
 
         # Mostrar el sentido de la vía
         if self.sentido_via:
-            if self.sentido_via == "doble":
-                return "<->"
-            elif self.sentido_via == "derecha":
-                return "->"
-            elif self.sentido_via == "izquierda":
-                return "<-"
+            return ", ".join(self.sentido_via)  # Mostrar los sentidos separados por comas
 
         # Si no hay información relevante, mostrar un espacio en blanco
         return " "
-    
+
     def agregar_vecino(self, nodo):
         self.vecinos.append(nodo)
 
