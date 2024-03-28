@@ -85,7 +85,7 @@ class Simulacion:
                 return self.costo_combustible(nodo_actual, nodo_vecino, vehiculo)  # Se pasa el vehículo como argumento
             return a_estrella(self.mapa, origen, destino, funcion_costo_combustible)
         elif tipo_viaje == "Más económica":
-            return a_estrella(self.mapa, origen, destino, self.costo_economico)
+            return a_estrella(self.mapa, origen, destino, lambda nodo_actual, nodo_vecino: self.costo_economico(nodo_actual, nodo_vecino, vehiculo))
         elif tipo_viaje == "Tour-Trip":
             return self.calcular_ruta_tour_trip()
         else:
@@ -116,9 +116,9 @@ class Simulacion:
         
         return consumo_combustible
 
-    def costo_economico(self, nodo_actual, nodo_vecino):
+    def costo_economico(self, nodo_actual, nodo_vecino, vehiculo):
         costo_tiempo = self.costo_tiempo(nodo_actual, nodo_vecino)
-        costo_combustible = self.costo_combustible(nodo_actual, nodo_vecino)
+        costo_combustible = self.costo_combustible(nodo_actual, nodo_vecino, vehiculo)
         # Ajustar los pesos según los criterios de UrbanLift
         return 0.7 * costo_tiempo + 0.3 * costo_combustible
 
