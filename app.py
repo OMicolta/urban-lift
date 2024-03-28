@@ -99,11 +99,15 @@ if st.sidebar.button("Iniciar simulación"):
 
             # Se asume que la simulación calcula las otras rutas
             # y las almacena en una lista llamada 'otras_rutas'
-            costo = simulacion.calcular_costo(ruta)
-            distancia = len(ruta) - 1
-            duracion = simulacion.calcular_duracion(ruta)
+            # Se asume que el método 'calcular_otras_rutas' devuelve una lista de rutas
+            for ruta in otras_rutas:
+                costo = simulacion.calcular_costo(ruta)
+                distancia = len(ruta) - 1
+                duracion = simulacion.calcular_duracion(ruta)
+                ruta_secuencia = [nodo.nombre for nodo in ruta]
 
-            st.write(f"Costo: {costo}, Distancia: {distancia}, Duración: {duracion}")
+                st.write(f"Ruta: {ruta_secuencia}")
+                st.write(f"Costo: {costo}, Distancia: {distancia}, Duración: {duracion}")
 
         elif tipo_viaje == "Tour-Trip":
             # Mostrar información sobre los puntos de interés visitados

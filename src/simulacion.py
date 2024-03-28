@@ -1,5 +1,6 @@
 #simulacion.py
 import json
+import random
 from src.mapa import Mapa
 from src.vehiculo import Vehiculo
 from src.algoritmos import bfs, a_estrella
@@ -32,7 +33,7 @@ class Simulacion:
 
         if vehiculo:
             # Calcular la ruta
-            ruta = self.calcular_ruta(origen, destino, tipo_viaje)
+            ruta = self.calcular_ruta(origen, destino, tipo_viaje, vehiculo)
 
              # Verificar si se encontró una ruta
             if ruta is None:
@@ -49,7 +50,7 @@ class Simulacion:
             # Calcular otras rutas si es necesario
             otras_rutas = []
             if tipo_viaje == "Menor consumo":
-                otras_rutas = self.calcular_otras_rutas(origen, destino)
+                otras_rutas = self.calcular_otras_rutas(origen, destino, ruta, vehiculo)
 
             return vehiculo.id, costo, distancia, duracion, ruta, otras_rutas
         else:
@@ -73,13 +74,16 @@ class Simulacion:
         # Se puede utilizar la distancia Manhattan o la distancia euclidiana
         return abs(nodo1.calle - nodo2.calle) + abs(nodo1.carrera - nodo2.carrera)
 
-    def calcular_ruta(self, origen, destino, tipo_viaje):
+    def calcular_ruta(self, origen, destino, tipo_viaje, vehiculo):
         if tipo_viaje == "Más corta":
             return bfs(self.mapa, origen, destino)
         elif tipo_viaje == "Más rápida":
             return a_estrella(self.mapa, origen, destino, self.costo_tiempo)
         elif tipo_viaje == "Menor consumo":
-            return a_estrella(self.mapa, origen, destino, self.costo_combustible)
+            # Crear una nueva función que se pueda pasar como argumento al método a_estrella
+            def funcion_costo_combustible(nodo_actual, nodo_vecino):
+                return self.costo_combustible(nodo_actual, nodo_vecino, vehiculo)  # Se pasa el vehículo como argumento
+            return a_estrella(self.mapa, origen, destino, funcion_costo_combustible)
         elif tipo_viaje == "Más económica":
             return a_estrella(self.mapa, origen, destino, self.costo_economico)
         elif tipo_viaje == "Tour-Trip":
@@ -100,9 +104,17 @@ class Simulacion:
             # ... (Aquí se podría implementar una lógica para visualizar el movimiento en la GUI)
         vehiculo.ocupado = False
 
-    def costo_combustible(self, nodo_actual, nodo_vecino):
-        # Se asume que el consumo de combustible es proporcional a la distancia
-        return self.calcular_distancia(nodo_actual, nodo_vecino)
+    def costo_combustible(self, nodo_actual, nodo_vecino, vehiculo):
+        # Obtener la eficiencia del combustible del vehículo
+        eficiencia_combustible = vehiculo.consumo_combustible
+
+        # Calcular la distancia entre los nodos
+        distancia = self.calcular_distancia(nodo_actual, nodo_vecino)
+
+        # Calcular el consumo de combustible
+        consumo_combustible = distancia / eficiencia_combustible
+        
+        return consumo_combustible
 
     def costo_economico(self, nodo_actual, nodo_vecino):
         costo_tiempo = self.costo_tiempo(nodo_actual, nodo_vecino)
@@ -154,7 +166,18 @@ class Simulacion:
             duracion += 1  # Se suma 1 por el movimiento entre nodos
         return duracion
 
-    def calcular_otras_rutas(self, origen, destino):
-        # Implementar la lógica para calcular otras rutas
-        # ...
-        return []  # Devolver una lista vacía por defecto
+    def calcular_otras_rutas(self, origen, destino, ruta_menor_consumo, vehiculo):
+        otras_rutas = []
+
+        # Calcular algunas rutas alternativas
+        for _ in range(3):  # Calcular 3 rutas alternativas
+            # Modificar la función de costo para explorar diferentes rutas
+            funcion_costo_modificada = lambda nodo_actual, nodo_vecino, vehiculo=vehiculo: self.costo_combustible(nodo_actual, nodo_vecino, vehiculo) * random.uniform(0.8, 1.2)  # Se pasa el vehículo como argumento por defecto
+
+            ruta_alternativa = a_estrella(self.mapa, origen, destino, funcion_costo_modificada)
+
+            # Verificar que la ruta alternativa sea diferente a la ruta principal
+            if ruta_alternativa is not None and ruta_alternativa not in otras_rutas and ruta_alternativa != ruta_menor_consumo:
+                otras_rutas.append(ruta_alternativa)
+
+        return otras_rutas
