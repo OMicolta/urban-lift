@@ -56,10 +56,16 @@ tabla_mapa = st.table(matriz_visualizacion)
 
 # Panel de solicitud de viaje
 st.sidebar.header("Solicitar viaje")
-origen_calle = st.sidebar.number_input("Calle de origen")
-origen_carrera = st.sidebar.number_input("Carrera de origen")
-destino_calle = st.sidebar.number_input("Calle de destino")
-destino_carrera = st.sidebar.number_input("Carrera de destino")
+
+# Obtener la lista de nombres de nodos
+nombres_nodos = [nodo.nombre for fila in simulacion.mapa.matriz for nodo in fila if nodo.nombre]
+
+# Selectbox para el lugar de origen
+lugar_origen = st.sidebar.selectbox("Lugar de origen", nombres_nodos)
+
+# Selectbox para el lugar de destino
+lugar_destino = st.sidebar.selectbox("Lugar de destino", nombres_nodos)
+
 tipo_viaje = st.sidebar.selectbox("Tipo de viaje", ["Más corta", "Más rápida", "Menor consumo", "Más económica", "Tour-Trip"])
 
 # Botón para iniciar la simulación
@@ -70,8 +76,8 @@ if st.sidebar.button("Iniciar simulación"):
     # simulacion.agregar_vehiculo(consumo_combustible)
 
     # Obtener los IDs de los nodos de origen y destino
-    origen_id = simulacion.mapa.obtener_id_nodo(origen_calle, origen_carrera)
-    destino_id = simulacion.mapa.obtener_id_nodo(destino_calle, destino_carrera)
+    origen_id = simulacion.mapa.obtener_id_nodo_por_nombre(lugar_origen)
+    destino_id = simulacion.mapa.obtener_id_nodo_por_nombre(lugar_destino)
 
     # Procesar la solicitud de viaje
     id_vehiculo, costo, distancia, duracion, ruta, otras_rutas = simulacion.procesar_solicitud(

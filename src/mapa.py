@@ -69,3 +69,10 @@ class Mapa:
                 return True
 
         return False  # El sentido de la vía no permite el movimiento
+    
+    def obtener_id_nodo_por_nombre(self, nombre_nodo):
+        for fila in self.matriz:
+            for nodo in fila:
+                if nodo.nombre == nombre_nodo:
+                    return nodo.id
+        return None  # Nodo no encontrado
