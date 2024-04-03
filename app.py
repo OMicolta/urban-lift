@@ -46,9 +46,9 @@ for i in range(len(matriz_mapa)):
         for vehiculo in simulacion.vehiculos:
             if vehiculo.posicion == nodo.id:
                 if vehiculo.ocupado:
-                    matriz_visualizacion[i][j] += f" 🚗"
+                    matriz_visualizacion[i][j] += f" 🚗V{vehiculo.id}"
                 else:
-                    matriz_visualizacion[i][j] += f" 🚓"
+                    matriz_visualizacion[i][j] += f" 🚓V{vehiculo.id}"
         
 
 # Mostrar la tabla

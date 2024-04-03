@@ -1,6 +1,7 @@
 #simulacion.py
 import json
 import random
+import time
 from src.mapa import Mapa
 from src.vehiculo import Vehiculo
 from src.algoritmos import bfs, a_estrella
@@ -63,7 +64,6 @@ class Simulacion:
         for vehiculo in self.vehiculos:
             if not vehiculo.ocupado:
                 distancia = self.calcular_distancia(self.mapa.obtener_nodo(vehiculo.posicion), origen)
-                print('distancia', distancia)
                 if distancia < distancia_minima:
                     distancia_minima = distancia
                     vehiculo_cercano = vehiculo
@@ -97,7 +97,7 @@ class Simulacion:
         else:
             return 1  # Solo se suma 1 por el movimiento
 
-    def simular_movimiento(self, vehiculo, ruta):
+    def simular_movimiento(self, vehiculo, ruta): 
         vehiculo.ocupado = True
         for nodo in ruta:
             vehiculo.mover(nodo.id)

@@ -76,3 +76,11 @@ class Mapa:
                 if nodo.nombre == nombre_nodo:
                     return nodo.id
         return None  # Nodo no encontrado
+    
+    def obtener_coordenadas_nodo(self, id_nodo):
+        for i in range(len(self.matriz)):
+            for j in range(len(self.matriz[i])):
+                nodo = self.matriz[i][j]
+                if nodo.id == id_nodo:
+                    return nodo.calle, nodo.carrera
+        return None  # Nodo no encontrado
