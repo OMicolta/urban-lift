@@ -41,7 +41,7 @@
   "vehiculos": [
     {"id": 1, "posicion": 1, "ocupado": true, "consumo_combustible": 10, "capacidad": 4},
     {"id": 2, "posicion": 7, "ocupado": false, "consumo_combustible": 8, "capacidad": 5},
-    {"id": 3, "posicion": 15, "ocupado": true, "consumo_combustible": 8, "capacidad": 5},
+    {"id": 3, "posicion": 15, "ocupado": true, "consumo_combustible": 7, "capacidad": 5},
     {"id": 4, "posicion": 20, "ocupado": false, "consumo_combustible": 9, "capacidad": 6}
   ]
 }

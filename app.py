@@ -71,10 +71,7 @@ tipo_viaje = st.sidebar.selectbox("Tipo de viaje", ["Más corta", "Más rápida"
 # Botón para iniciar la simulación
 if st.sidebar.button("Iniciar simulación"):
     # Implementar lógica de simulación y mostrar resultados
-
-    # Agregar vehículos a la simulación (opcional)
-    # simulacion.agregar_vehiculo(consumo_combustible)
-
+   
     # Obtener los IDs de los nodos de origen y destino
     origen_id = simulacion.mapa.obtener_id_nodo_por_nombre(lugar_origen)
     destino_id = simulacion.mapa.obtener_id_nodo_por_nombre(lugar_destino)
@@ -87,6 +84,9 @@ if st.sidebar.button("Iniciar simulación"):
     # Mostrar los resultados de la simulación
     if id_vehiculo is not None:
         st.header("Información de la simulación")
+
+        # Contenedor para la tabla del mapa
+        mapa_contenedor = st.empty()
 
         # Mostrar mapa con la ruta del viaje
         ruta_coordenadas = [nodo.nombre for nodo in ruta]
@@ -123,5 +123,11 @@ if st.sidebar.button("Iniciar simulación"):
             for nodo in ruta:
                 if nodo.es_punto_interes:
                     st.write(f"- {nodo.nombre}")
+
+        # Simular el movimiento del vehículo
+        for vehiculo in simulacion.vehiculos:
+            if vehiculo.id == id_vehiculo:
+                simulacion.simular_movimiento(vehiculo, ruta, mapa_contenedor, matriz_visualizacion)
+                break  # Salir del ciclo una vez que se encuentra el vehículo
     else:
         st.error("No hay vehículos disponibles")

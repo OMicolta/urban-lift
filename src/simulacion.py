@@ -41,7 +41,7 @@ class Simulacion:
                 return None, None, None, None, None, None  # No se encontró una ruta
 
             # Simular el movimiento del vehículo
-            self.simular_movimiento(vehiculo, ruta)
+            #self.simular_movimiento(vehiculo, ruta)
 
             # Calcular los detalles del viaje
             costo = self.calcular_costo(ruta)
@@ -97,11 +97,28 @@ class Simulacion:
         else:
             return 1  # Solo se suma 1 por el movimiento
 
-    def simular_movimiento(self, vehiculo, ruta): 
+    def simular_movimiento(self, vehiculo, ruta, mapa_contenedor, matriz_visualizacion): 
         vehiculo.ocupado = True
         for nodo in ruta:
+            # Obtener las coordenadas del nodo actual
+            i_actual, j_actual = self.mapa.obtener_coordenadas_nodo(vehiculo.posicion)
+
+            # Mover el vehículo al siguiente nodo
             vehiculo.mover(nodo.id)
-            # ... (Aquí se podría implementar una lógica para visualizar el movimiento en la GUI)
+            
+            # Obtener las coordenadas del siguiente nodo
+            i_siguiente, j_siguiente = self.mapa.obtener_coordenadas_nodo(nodo.id)
+
+            # Actualizar la matriz de visualización
+            matriz_visualizacion[i_actual][j_actual] = matriz_visualizacion[i_actual][j_actual].replace(f" 🚓V{vehiculo.id}", "")  # Eliminar solo el vehículo
+            matriz_visualizacion[i_siguiente][j_siguiente] += f" 🚓V{vehiculo.id}"  # Agregar el vehículo al siguiente nodo
+
+            # Actualizar la tabla en la GUI
+            mapa_contenedor.table(matriz_visualizacion)
+
+            # Pausa para la visualización (opcional)
+            time.sleep(0.8)  # Se puede ajustar el tiempo de pausa
+
         vehiculo.ocupado = False
 
     def costo_combustible(self, nodo_actual, nodo_vecino, vehiculo):
