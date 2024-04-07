@@ -1,4 +1,4 @@
-#vehiculo.py
+#src/vehiculo.py
 class Vehiculo:
     def __init__(self, id, posicion, ocupado, consumo_combustible, capacidad):
         self.id = id
@@ -9,5 +9,3 @@ class Vehiculo:
 
     def mover(self, id_nodo_destino):
         self.posicion = id_nodo_destino
-
-    # ... (Otros métodos)

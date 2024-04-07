@@ -58,3 +58,22 @@ def reconstruir_ruta(padre, destino):
         ruta.append(destino)
     ruta.reverse()
     return ruta
+
+
+def dfs(mapa, origen, todos_visitados):
+    def dfs_recursivo(nodo_actual, visitados, ruta):
+        visitados.add(nodo_actual)
+        ruta.append(nodo_actual)
+
+        if todos_visitados(visitados):
+            return ruta  # Se ha visitado todos los puntos de interés
+
+        for vecino in nodo_actual.vecinos:
+            if vecino not in visitados and mapa.estan_conectados(nodo_actual, vecino):
+                resultado = dfs_recursivo(vecino, visitados.copy(), ruta.copy())
+                if resultado:
+                    return resultado
+
+        return None
+
+    return dfs_recursivo(origen, set(), [])

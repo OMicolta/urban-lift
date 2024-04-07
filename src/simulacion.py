@@ -1,10 +1,10 @@
-#simulacion.py
+#src/simulacion.py
 import json
 import random
 import time
 from src.mapa import Mapa
 from src.vehiculo import Vehiculo
-from src.algoritmos import bfs, a_estrella
+from src.algoritmos import bfs, a_estrella, dfs
 
 class Simulacion:
     def __init__(self, ruta_mapa):
@@ -130,15 +130,19 @@ class Simulacion:
         if not puntos_interes:
             return None
 
-        # Comenzar en el primer punto de interés
-        ruta = [puntos_interes[0]]
+        # Función para verificar si todos los puntos de interés han sido visitados
+        def todos_visitados(visitados):
+            for punto in puntos_interes:
+                if punto not in visitados:
+                    return False
+            return True
 
-        # Visitar los demás puntos de interés en orden aleatorio
-        for punto_interes in puntos_interes[1:]:
-            ruta.append(punto_interes)
+        # Iniciar la búsqueda desde el primer punto de interés
+        ruta = dfs(self.mapa, puntos_interes[0], todos_visitados) 
 
-        # Regresar al punto de origen
-        ruta.append(puntos_interes[0])
+        # Si se encontró una ruta, agregar el punto de origen al final
+        if ruta:
+            ruta.append(puntos_interes[0])
 
         return ruta
 
