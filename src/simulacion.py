@@ -71,7 +71,7 @@ class Simulacion:
         return vehiculo_cercano
 
     def calcular_distancia(self, nodo1, nodo2):
-        # Se puede utilizar la distancia Manhattan o la distancia euclidiana
+        # Distancia Manhattan
         return abs(nodo1.calle - nodo2.calle) + abs(nodo1.carrera - nodo2.carrera)
 
     def calcular_ruta(self, origen, destino, tipo_viaje, vehiculo):
@@ -80,9 +80,8 @@ class Simulacion:
         elif tipo_viaje == "Más rápida":
             return a_estrella(self.mapa, origen, destino, self.costo_tiempo)
         elif tipo_viaje == "Menor consumo":
-            # Crear una nueva función que se pueda pasar como argumento al método a_estrella
             def funcion_costo_combustible(nodo_actual, nodo_vecino):
-                return self.costo_combustible(nodo_actual, nodo_vecino, vehiculo)  # Se pasa el vehículo como argumento
+                return self.costo_combustible(nodo_actual, nodo_vecino, vehiculo) 
             return a_estrella(self.mapa, origen, destino, funcion_costo_combustible)
         elif tipo_viaje == "Más económica":
             return a_estrella(self.mapa, origen, destino, lambda nodo_actual, nodo_vecino: self.costo_economico(nodo_actual, nodo_vecino, vehiculo))
@@ -116,8 +115,8 @@ class Simulacion:
             # Actualizar la tabla en la GUI
             mapa_contenedor.table(matriz_visualizacion)
 
-            # Pausa para la visualización (opcional)
-            time.sleep(0.8)  # Se puede ajustar el tiempo de pausa
+            # Pausa para la visualización 
+            time.sleep(0.8) 
 
         vehiculo.ocupado = False
 
@@ -169,9 +168,6 @@ class Simulacion:
             nodo_actual = ruta[i - 1]
             nodo_siguiente = ruta[i]
 
-            # Se puede implementar una lógica para calcular el costo por tramo
-            # considerando la distancia, el tiempo, el consumo de combustible, etc.
-            # ...
             distancia = self.calcular_distancia(nodo_actual, nodo_siguiente)
             costo_tramo = distancia * 0.5  # Se asume un costo de 0.5 por unidad de distancia
 
