@@ -19,9 +19,13 @@ for i in range(len(matriz_mapa)):
     for j in range(len(matriz_mapa[i])):
         nodo = matriz_mapa[i][j]
 
-        # Mostrar el nombre del nodo (si tiene uno)
+        # Mostrar un emoji si el nodo es un punto de interés
+        if nodo.es_punto_interes:
+            matriz_visualizacion[i][j] = "🕍"
+
+        # Mostrar el nombre del nodo
         if nodo.nombre:
-            matriz_visualizacion[i][j] = nodo.nombre
+            matriz_visualizacion[i][j] += nodo.nombre
 
         # Mostrar el sentido de la vía con emojis
         if nodo.sentido_via:
